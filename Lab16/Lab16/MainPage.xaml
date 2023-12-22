@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:Lab16.Converters"
+             x:Class="Lab16.MainPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:StatusConverter x:Key="StatusConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <StackLayout>
+        <Button Text="Llamar a la API" Clicked="Button_Clicked"/>
+
+        <ListView x:Name="lstLibros" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="5" Spacing="10" Margin="10,0,10,10">
+                            <Frame BorderColor="#3498db" BackgroundColor="#f8f9fa" CornerRadius="5" HasShadow="True" Padding="5">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="{Binding titulo}" FontAttributes="Bold" FontSize="18" TextColor="#343a40" LineBreakMode="TailTruncation" Grid.Row="0" Grid.Column="0"/>
+                                    <Label Text="{Binding disponible, Converter={StaticResource StatusConverter}}" FontSize="Small" TextColor="#28a745" LineBreakMode="NoWrap" HorizontalOptions="End" VerticalOptions="Start" Grid.Row="0" Grid.Column="1"/>
+                                    <Label Text="{Binding autor}" FontSize="16" TextColor="#007bff" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
+                                    <Label Text="{Binding anio_publicacion, StringFormat='Año de Publicación: {0}'}" FontSize="14" TextColor="#6c757d" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"/>
+                                    <Label Text="{Binding genero}" FontSize="14" TextColor="#dc3545" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"/>
+                                    <Label Text="{Binding editorial}" FontSize="14" TextColor="#6610f2" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"/>
+                                </Grid>
+                            </Frame>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+
+    </StackLayout>
+
+</ContentPage>
